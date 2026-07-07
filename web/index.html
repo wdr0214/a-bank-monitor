@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A股银行股小时监控</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <h1>A股银行股小时监控</h1>
+          <p id="subtitle">交易时段 10:00 / 11:00 / 13:30 / 14:30 自动统计</p>
+        </div>
+        <button id="refreshBtn" type="button">手动刷新</button>
+      </header>
+
+      <section id="statusCard" class="status-card pending">
+        <div>
+          <span class="status-label">状态</span>
+          <strong id="statusText">正在加载...</strong>
+        </div>
+        <div>
+          <span class="status-label">最近成功</span>
+          <strong id="lastSuccess">--</strong>
+        </div>
+        <div>
+          <span class="status-label">本次更新时间</span>
+          <strong id="updatedAt">--</strong>
+        </div>
+      </section>
+
+      <section class="toolbar">
+        <input id="searchInput" type="search" placeholder="搜索代码或名称" />
+        <span id="rowCount">0 只银行股</span>
+      </section>
+
+      <section id="errorBox" class="error-box hidden"></section>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="rank" data-type="number">排名</th>
+              <th data-key="code">代码</th>
+              <th data-key="name">名称</th>
+              <th data-key="price" data-type="number">股价</th>
+              <th data-key="dividend_yield" data-type="number">股息率</th>
+              <th data-key="dividend_yield_percentile" data-type="number">股息率百分位</th>
+              <th data-key="profit_growth" data-type="number">业绩增速</th>
+              <th data-key="profit_period">业绩期</th>
+              <th data-key="annual_dividend" data-type="number">年度分红</th>
+              <th data-key="ttm_dividend" data-type="number">TTM分红</th>
+              <th data-key="error">错误</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

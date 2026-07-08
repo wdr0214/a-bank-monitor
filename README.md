@@ -12,7 +12,7 @@
 ## 本地运行
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-actions.txt
 python scripts/update_bank_data.py
 python -m http.server 8000
 ```

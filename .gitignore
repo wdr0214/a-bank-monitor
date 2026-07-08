@@ -8,3 +8,6 @@ node_modules/
 bank_factor_outputs/
 bank_factor_backtest.py
 finish_bank_factor_offline.py
+
+.vercel
+.env*

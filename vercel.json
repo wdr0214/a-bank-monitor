@@ -1,16 +1,18 @@
 {
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/data/:path*", "destination": "/data/:path*" },
-    { "source": "/", "destination": "/web/index.html" },
-    { "source": "/:path*", "destination": "/web/:path*" }
+  "version": 2,
+  "builds": [
+    { "src": "api/refresh.js", "use": "@vercel/node" },
+    { "src": "web/**", "use": "@vercel/static" },
+    { "src": "data/**", "use": "@vercel/static" }
   ],
-  "headers": [
+  "routes": [
     {
-      "source": "/data/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
-      ]
-    }
+      "src": "/data/(.*)",
+      "headers": { "Cache-Control": "no-store" },
+      "dest": "/data/$1"
+    },
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/", "dest": "/web/index.html" },
+    { "src": "/(.*)", "dest": "/web/$1" }
   ]
 }

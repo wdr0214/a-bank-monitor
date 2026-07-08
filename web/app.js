@@ -108,6 +108,8 @@ function renderTable() {
         <td class="${growthClass}">${fmt.percent(Number(row.profit_growth))}</td>
         <td>${fmt.text(row.profit_period)}</td>
         <td>${fmt.number(Number(row.dividend_dps_used), 4)}</td>
+        <td>${fmt.number(Number(row.annual_eps), 4)}</td>
+        <td>${fmt.percent(Number(row.dividend_payout_ratio))}</td>
         <td>${fmt.number(Number(row.annual_dividend), 4)}</td>
         <td>${fmt.number(Number(row.ttm_dividend), 4)}</td>
         <td>${fmt.text(row.dividend_basis)}</td>

@@ -161,6 +161,19 @@ def latest_profit_growth(financial: pd.DataFrame, as_of: datetime) -> tuple[floa
     return growth, period
 
 
+def annual_eps_for_year(financial: pd.DataFrame, year: int) -> float | None:
+    row = financial[financial["指标"].astype(str).eq("基本每股收益")]
+    if row.empty:
+        return None
+    column = f"{year}1231"
+    if column not in row.columns:
+        return None
+    value = pd.to_numeric(row.iloc[0][column], errors="coerce")
+    if pd.isna(value) or float(value) == 0:
+        return None
+    return float(value)
+
+
 def normalize_dividend(dividend: pd.DataFrame) -> pd.DataFrame:
     df = dividend.copy()
     df["除权日"] = pd.to_datetime(df["除权日"], errors="coerce")
@@ -321,6 +334,8 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
             uses_ttm = dividend_basis == "TTM"
             ttm_dps = ttm_dividend(dividend, as_of_ts) if uses_ttm else None
             current_yield = dividend_dps / price if price and dividend_dps and dividend_dps > 0 else None
+            annual_eps = annual_eps_for_year(financial, dividend_report_year)
+            dividend_payout_ratio = dividend_dps / annual_eps if dividend_dps and annual_eps else None
             percentile = dividend_yield_percentile(history, dividend, current_yield, as_of_ts, uses_ttm)
             growth, period = latest_profit_growth(financial, as_of)
         except Exception as exc:
@@ -332,6 +347,8 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
             dividend_basis = ""
             dividend_report_year = None
             interim_dps = None
+            annual_eps = None
+            dividend_payout_ratio = None
             uses_ttm = False
             current_yield = None
             percentile = None
@@ -358,6 +375,8 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
                 "dividend_report_year": dividend_report_year,
                 "interim_dividend": interim_dps,
                 "dividend_dps_used": dividend_dps,
+                "annual_eps": annual_eps,
+                "dividend_payout_ratio": dividend_payout_ratio,
                 "updated_at": iso_now(),
                 "error": row_error,
             }
@@ -403,6 +422,8 @@ def write_latest(rows: list[dict[str, Any]], errors: list[str]) -> None:
         "dividend_report_year",
         "interim_dividend",
         "dividend_dps_used",
+        "annual_eps",
+        "dividend_payout_ratio",
         "updated_at",
         "error",
     ]

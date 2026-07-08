@@ -177,14 +177,39 @@ def annual_dividend_for_year(dividend: pd.DataFrame, year: int) -> float:
     return float(dividend.loc[dividend["report_year"].eq(year), "dps"].sum())
 
 
-def has_interim_dividend(dividend: pd.DataFrame) -> bool:
-    return bool(dividend["分红类型"].astype(str).str.contains("中期", na=False, regex=False).any())
+def latest_dividend_report_year(dividend: pd.DataFrame, as_of: pd.Timestamp) -> int:
+    visible = dividend[dividend["除权日"] <= as_of].copy()
+    if visible.empty:
+        return min(as_of.year, 2025)
+    return int(visible["report_year"].dropna().max())
+
+
+def interim_dividend_for_year(dividend: pd.DataFrame, year: int) -> float:
+    is_interim = dividend["分红类型"].astype(str).str.contains("中期", na=False, regex=False)
+    return float(dividend.loc[dividend["report_year"].eq(year) & is_interim, "dps"].sum())
+
+
+def has_interim_dividend_for_year(dividend: pd.DataFrame, year: int) -> bool:
+    return interim_dividend_for_year(dividend, year) > 0
 
 
 def ttm_dividend(dividend: pd.DataFrame, as_of: pd.Timestamp) -> float:
     start = as_of - pd.Timedelta(days=365)
     window = dividend[(dividend["除权日"] <= as_of) & (dividend["除权日"] > start)]
     return float(window["dps"].sum())
+
+
+def current_dividend_basis(dividend: pd.DataFrame, as_of: pd.Timestamp) -> tuple[float, str, int, float | None]:
+    report_year = latest_dividend_report_year(dividend, as_of)
+    annual_dps = annual_dividend_for_year(dividend, report_year)
+    interim_dps = interim_dividend_for_year(dividend, report_year)
+    has_current_interim = interim_dps > 0
+    has_previous_interim = has_interim_dividend_for_year(dividend, report_year - 1)
+    if has_current_interim and has_previous_interim:
+        return ttm_dividend(dividend, as_of), "TTM", report_year, interim_dps
+    if has_current_interim:
+        return interim_dps * 2, "中期*2", report_year, interim_dps
+    return annual_dps, "年度", report_year, None
 
 
 def dividend_for_percentile(dividend: pd.DataFrame, date: pd.Timestamp, use_ttm: bool) -> float:
@@ -290,10 +315,11 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
             history = read_csv(CACHE / f"hist_{code}_raw.csv")
             quote = quotes[code]
             price = quote.price
-            uses_ttm = has_interim_dividend(dividend)
-            annual_dps = annual_dividend_for_year(dividend, min(as_of.year, 2025))
+            dividend_dps, dividend_basis, dividend_report_year, interim_dps = current_dividend_basis(dividend, as_of_ts)
+            annual_dps = annual_dividend_for_year(dividend, dividend_report_year)
+            annual_yield = annual_dps / price if price and annual_dps > 0 else None
+            uses_ttm = dividend_basis == "TTM"
             ttm_dps = ttm_dividend(dividend, as_of_ts) if uses_ttm else None
-            dividend_dps = ttm_dps if uses_ttm else annual_dps
             current_yield = dividend_dps / price if price and dividend_dps and dividend_dps > 0 else None
             percentile = dividend_yield_percentile(history, dividend, current_yield, as_of_ts, uses_ttm)
             growth, period = latest_profit_growth(financial, as_of)
@@ -301,6 +327,11 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
             price = None
             ttm_dps = None
             annual_dps = None
+            annual_yield = None
+            dividend_dps = None
+            dividend_basis = ""
+            dividend_report_year = None
+            interim_dps = None
             uses_ttm = False
             current_yield = None
             percentile = None
@@ -316,12 +347,17 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
                 "listing_date": listing_date,
                 "price": price,
                 "dividend_yield": current_yield,
+                "annual_dividend_yield": annual_yield,
                 "dividend_yield_percentile": percentile,
                 "profit_growth": growth,
                 "profit_period": period,
                 "annual_dividend": annual_dps,
                 "ttm_dividend": ttm_dps,
                 "uses_ttm_dividend": uses_ttm,
+                "dividend_basis": dividend_basis,
+                "dividend_report_year": dividend_report_year,
+                "interim_dividend": interim_dps,
+                "dividend_dps_used": dividend_dps,
                 "updated_at": iso_now(),
                 "error": row_error,
             }
@@ -356,12 +392,17 @@ def write_latest(rows: list[dict[str, Any]], errors: list[str]) -> None:
         "listing_date",
         "price",
         "dividend_yield",
+        "annual_dividend_yield",
         "dividend_yield_percentile",
         "profit_growth",
         "profit_period",
         "annual_dividend",
         "ttm_dividend",
         "uses_ttm_dividend",
+        "dividend_basis",
+        "dividend_report_year",
+        "interim_dividend",
+        "dividend_dps_used",
         "updated_at",
         "error",
     ]

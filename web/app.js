@@ -103,12 +103,14 @@ function renderTable() {
         <td>${fmt.text(row.name)}</td>
         <td>${fmt.number(Number(row.price), 2)}</td>
         <td>${fmt.percent(Number(row.dividend_yield))}</td>
+        <td>${fmt.percent(Number(row.annual_dividend_yield))}</td>
         <td>${fmt.percent(Number(row.dividend_yield_percentile))}</td>
         <td class="${growthClass}">${fmt.percent(Number(row.profit_growth))}</td>
         <td>${fmt.text(row.profit_period)}</td>
+        <td>${fmt.number(Number(row.dividend_dps_used), 4)}</td>
         <td>${fmt.number(Number(row.annual_dividend), 4)}</td>
         <td>${fmt.number(Number(row.ttm_dividend), 4)}</td>
-        <td>${row.uses_ttm_dividend ? "TTM" : "年度"}</td>
+        <td>${fmt.text(row.dividend_basis)}</td>
         <td class="${row.error ? "negative" : "empty"}">${fmt.text(row.error)}</td>
       </tr>`;
     })

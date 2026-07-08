@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08 22:34:46",
+  "generated_at": "2026-07-08 22:58:39",
   "source": "GitHub Actions / Tencent quote / cached financial and dividend data",
   "dividend_policy": "Current yield uses 2026 TTM available dividends; percentile history uses annual dividend for 2025 and before.",
   "rows": [
@@ -14,7 +14,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.12,
       "ttm_dividend": 0.24,
-      "updated_at": "2026-07-08 22:34:45",
+      "updated_at": "2026-07-08 22:58:38",
       "error": "",
       "rank": 1
     },
@@ -29,7 +29,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.189,
       "ttm_dividend": 0.251,
-      "updated_at": "2026-07-08 22:34:31",
+      "updated_at": "2026-07-08 22:58:28",
       "error": "",
       "rank": 2
     },
@@ -44,7 +44,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.381,
       "ttm_dividend": 0.5531999999999999,
-      "updated_at": "2026-07-08 22:34:35",
+      "updated_at": "2026-07-08 22:58:31",
       "error": "",
       "rank": 3
     },
@@ -59,7 +59,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.6599999999999999,
       "ttm_dividend": 0.94,
-      "updated_at": "2026-07-08 22:34:37",
+      "updated_at": "2026-07-08 22:58:33",
       "error": "",
       "rank": 4
     },
@@ -74,7 +74,7 @@
       "profit_period": "20260331",
       "annual_dividend": 2.016,
       "ttm_dividend": 3.013,
-      "updated_at": "2026-07-08 22:34:31",
+      "updated_at": "2026-07-08 22:58:28",
       "error": "",
       "rank": 5
     },
@@ -89,7 +89,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.1,
       "ttm_dividend": 0.1,
-      "updated_at": "2026-07-08 22:34:41",
+      "updated_at": "2026-07-08 22:58:36",
       "error": "",
       "rank": 6
     },
@@ -104,7 +104,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.3,
       "ttm_dividend": 0.3,
-      "updated_at": "2026-07-08 22:34:43",
+      "updated_at": "2026-07-08 22:58:37",
       "error": "",
       "rank": 7
     },
@@ -119,7 +119,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.0,
       "ttm_dividend": 0.02,
-      "updated_at": "2026-07-08 22:34:44",
+      "updated_at": "2026-07-08 22:58:38",
       "error": "",
       "rank": 8
     },
@@ -134,7 +134,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.22,
       "ttm_dividend": 0.22,
-      "updated_at": "2026-07-08 22:34:43",
+      "updated_at": "2026-07-08 22:58:37",
       "error": "",
       "rank": 9
     },
@@ -149,7 +149,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.27,
       "ttm_dividend": 0.27,
-      "updated_at": "2026-07-08 22:34:39",
+      "updated_at": "2026-07-08 22:58:34",
       "error": "",
       "rank": 10
     },
@@ -164,7 +164,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.21,
       "ttm_dividend": 0.21,
-      "updated_at": "2026-07-08 22:34:46",
+      "updated_at": "2026-07-08 22:58:39",
       "error": "",
       "rank": 11
     },
@@ -179,7 +179,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.24000000000000002,
       "ttm_dividend": 0.24000000000000002,
-      "updated_at": "2026-07-08 22:34:36",
+      "updated_at": "2026-07-08 22:58:32",
       "error": "",
       "rank": 12
     },
@@ -194,7 +194,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.22,
       "ttm_dividend": 0.22,
-      "updated_at": "2026-07-08 22:34:43",
+      "updated_at": "2026-07-08 22:58:37",
       "error": "",
       "rank": 13
     },
@@ -209,7 +209,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.10500000000000001,
       "ttm_dividend": 0.19,
-      "updated_at": "2026-07-08 22:34:34",
+      "updated_at": "2026-07-08 22:58:30",
       "error": "",
       "rank": 14
     },
@@ -224,7 +224,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.3,
       "ttm_dividend": 1.2,
-      "updated_at": "2026-07-08 22:34:36",
+      "updated_at": "2026-07-08 22:58:32",
       "error": "",
       "rank": 15
     },
@@ -239,7 +239,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.596,
       "ttm_dividend": 0.596,
-      "updated_at": "2026-07-08 22:34:29",
+      "updated_at": "2026-07-08 22:58:27",
       "error": "",
       "rank": 16
     },
@@ -254,7 +254,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.3103,
       "ttm_dividend": 0.4749,
-      "updated_at": "2026-07-08 22:34:34",
+      "updated_at": "2026-07-08 22:58:30",
       "error": "",
       "rank": 17
     },
@@ -269,7 +269,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.0,
       "ttm_dividend": 0.41,
-      "updated_at": "2026-07-08 22:34:30",
+      "updated_at": "2026-07-08 22:58:27",
       "error": "",
       "rank": 18
     },
@@ -284,7 +284,7 @@
       "profit_period": "20260331",
       "annual_dividend": 1.066,
       "ttm_dividend": 1.066,
-      "updated_at": "2026-07-08 22:34:32",
+      "updated_at": "2026-07-08 22:58:29",
       "error": "",
       "rank": 19
     },
@@ -299,7 +299,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.1,
       "ttm_dividend": 0.1,
-      "updated_at": "2026-07-08 22:34:38",
+      "updated_at": "2026-07-08 22:58:33",
       "error": "",
       "rank": 20
     },
@@ -314,7 +314,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.2495,
       "ttm_dividend": 0.375,
-      "updated_at": "2026-07-08 22:34:33",
+      "updated_at": "2026-07-08 22:58:29",
       "error": "",
       "rank": 21
     },
@@ -329,7 +329,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.36,
       "ttm_dividend": 0.36,
-      "updated_at": "2026-07-08 22:34:45",
+      "updated_at": "2026-07-08 22:58:39",
       "error": "",
       "rank": 22
     },
@@ -344,7 +344,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.52,
       "ttm_dividend": 0.52,
-      "updated_at": "2026-07-08 22:34:39",
+      "updated_at": "2026-07-08 22:58:34",
       "error": "",
       "rank": 23
     },
@@ -359,7 +359,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.4481,
       "ttm_dividend": 0.4481,
-      "updated_at": "2026-07-08 22:34:42",
+      "updated_at": "2026-07-08 22:58:36",
       "error": "",
       "rank": 24
     },
@@ -374,7 +374,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.52915,
       "ttm_dividend": 0.52915,
-      "updated_at": "2026-07-08 22:34:31",
+      "updated_at": "2026-07-08 22:58:28",
       "error": "",
       "rank": 25
     },
@@ -389,7 +389,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.131,
       "ttm_dividend": 0.131,
-      "updated_at": "2026-07-08 22:34:42",
+      "updated_at": "2026-07-08 22:58:36",
       "error": "",
       "rank": 26
     },
@@ -404,7 +404,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.32091,
       "ttm_dividend": 0.32091,
-      "updated_at": "2026-07-08 22:34:38",
+      "updated_at": "2026-07-08 22:58:33",
       "error": "",
       "rank": 27
     },
@@ -419,7 +419,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.1,
       "ttm_dividend": 0.1,
-      "updated_at": "2026-07-08 22:34:30",
+      "updated_at": "2026-07-08 22:58:27",
       "error": "",
       "rank": 28
     },
@@ -434,7 +434,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.2,
       "ttm_dividend": 0.2,
-      "updated_at": "2026-07-08 22:34:40",
+      "updated_at": "2026-07-08 22:58:35",
       "error": "",
       "rank": 29
     },
@@ -449,7 +449,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.25,
       "ttm_dividend": 0.25,
-      "updated_at": "2026-07-08 22:34:39",
+      "updated_at": "2026-07-08 22:58:34",
       "error": "",
       "rank": 30
     },
@@ -464,7 +464,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.18,
       "ttm_dividend": 0.18,
-      "updated_at": "2026-07-08 22:34:44",
+      "updated_at": "2026-07-08 22:58:38",
       "error": "",
       "rank": 31
     },
@@ -479,7 +479,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.27799999999999997,
       "ttm_dividend": 0.2,
-      "updated_at": "2026-07-08 22:34:32",
+      "updated_at": "2026-07-08 22:58:29",
       "error": "",
       "rank": 32
     },
@@ -494,7 +494,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.921,
       "ttm_dividend": 0.891,
-      "updated_at": "2026-07-08 22:34:41",
+      "updated_at": "2026-07-08 22:58:35",
       "error": "",
       "rank": 33
     },
@@ -509,7 +509,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.5641,
       "ttm_dividend": 0.5453,
-      "updated_at": "2026-07-08 22:34:37",
+      "updated_at": "2026-07-08 22:58:32",
       "error": "",
       "rank": 34
     },
@@ -524,7 +524,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.3247,
       "ttm_dividend": 0.1563,
-      "updated_at": "2026-07-08 22:34:33",
+      "updated_at": "2026-07-08 22:58:30",
       "error": "",
       "rank": 35
     },
@@ -539,7 +539,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.38870000000000005,
       "ttm_dividend": 0.18580000000000002,
-      "updated_at": "2026-07-08 22:34:35",
+      "updated_at": "2026-07-08 22:58:31",
       "error": "",
       "rank": 36
     },
@@ -554,7 +554,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.2263,
       "ttm_dividend": 0.10940000000000001,
-      "updated_at": "2026-07-08 22:34:35",
+      "updated_at": "2026-07-08 22:58:31",
       "error": "",
       "rank": 37
     },
@@ -569,7 +569,7 @@
       "profit_period": "20260331",
       "annual_dividend": 0.2183,
       "ttm_dividend": 0.123,
-      "updated_at": "2026-07-08 22:34:40",
+      "updated_at": "2026-07-08 22:58:35",
       "error": "",
       "rank": 38
     }

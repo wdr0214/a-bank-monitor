@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08 23:28:24",
+  "generated_at": "2026-07-08 23:34:35",
   "source": "GitHub Actions / Tencent quote / cached financial and dividend data",
   "dividend_policy": "Current yield uses 2026 TTM available dividends; percentile history uses annual dividend for 2025 and before.",
   "rows": [
@@ -20,7 +20,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.15,
       "dividend_dps_used": 0.3,
-      "updated_at": "2026-07-08 23:28:18",
+      "updated_at": "2026-07-08 23:34:28",
       "error": "",
       "rank": 1
     },
@@ -41,7 +41,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.136,
       "dividend_dps_used": 0.251,
-      "updated_at": "2026-07-08 23:28:12",
+      "updated_at": "2026-07-08 23:34:20",
       "error": "",
       "rank": 2
     },
@@ -62,7 +62,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.188,
       "dividend_dps_used": 0.5531999999999999,
-      "updated_at": "2026-07-08 23:28:16",
+      "updated_at": "2026-07-08 23:34:25",
       "error": "",
       "rank": 3
     },
@@ -83,7 +83,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.22,
-      "updated_at": "2026-07-08 23:28:22",
+      "updated_at": "2026-07-08 23:34:32",
       "error": "",
       "rank": 4
     },
@@ -104,7 +104,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.09,
       "dividend_dps_used": 0.18,
-      "updated_at": "2026-07-08 23:28:24",
+      "updated_at": "2026-07-08 23:34:35",
       "error": "",
       "rank": 5
     },
@@ -125,7 +125,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.38,
       "dividend_dps_used": 0.94,
-      "updated_at": "2026-07-08 23:28:17",
+      "updated_at": "2026-07-08 23:34:27",
       "error": "",
       "rank": 6
     },
@@ -146,7 +146,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.05,
       "dividend_dps_used": 0.1,
-      "updated_at": "2026-07-08 23:28:20",
+      "updated_at": "2026-07-08 23:34:31",
       "error": "",
       "rank": 7
     },
@@ -167,7 +167,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.3,
-      "updated_at": "2026-07-08 23:28:21",
+      "updated_at": "2026-07-08 23:34:32",
       "error": "",
       "rank": 8
     },
@@ -188,7 +188,7 @@
       "dividend_report_year": 2024,
       "interim_dividend": null,
       "dividend_dps_used": 0.02,
-      "updated_at": "2026-07-08 23:28:22",
+      "updated_at": "2026-07-08 23:34:33",
       "error": "",
       "rank": 9
     },
@@ -209,7 +209,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.10500000000000001,
       "dividend_dps_used": 0.19,
-      "updated_at": "2026-07-08 23:28:15",
+      "updated_at": "2026-07-08 23:34:24",
       "error": "",
       "rank": 10
     },
@@ -230,7 +230,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.12,
-      "updated_at": "2026-07-08 23:28:23",
+      "updated_at": "2026-07-08 23:34:34",
       "error": "",
       "rank": 11
     },
@@ -251,7 +251,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.11000000000000001,
       "dividend_dps_used": 0.22000000000000003,
-      "updated_at": "2026-07-08 23:28:17",
+      "updated_at": "2026-07-08 23:34:26",
       "error": "",
       "rank": 12
     },
@@ -272,7 +272,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.5650000000000001,
       "dividend_dps_used": 1.1300000000000001,
-      "updated_at": "2026-07-08 23:28:13",
+      "updated_at": "2026-07-08 23:34:22",
       "error": "",
       "rank": 13
     },
@@ -293,7 +293,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.236,
       "dividend_dps_used": 0.596,
-      "updated_at": "2026-07-08 23:28:11",
+      "updated_at": "2026-07-08 23:34:19",
       "error": "",
       "rank": 14
     },
@@ -314,7 +314,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.1414,
       "dividend_dps_used": 0.4749,
-      "updated_at": "2026-07-08 23:28:15",
+      "updated_at": "2026-07-08 23:34:23",
       "error": "",
       "rank": 15
     },
@@ -335,7 +335,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.1,
       "dividend_dps_used": 0.2,
-      "updated_at": "2026-07-08 23:28:22",
+      "updated_at": "2026-07-08 23:34:33",
       "error": "",
       "rank": 16
     },
@@ -356,7 +356,7 @@
       "dividend_report_year": 2024,
       "interim_dividend": null,
       "dividend_dps_used": 0.41,
-      "updated_at": "2026-07-08 23:28:12",
+      "updated_at": "2026-07-08 23:34:20",
       "error": "",
       "rank": 17
     },
@@ -377,7 +377,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 1.0130000000000001,
       "dividend_dps_used": 2.0260000000000002,
-      "updated_at": "2026-07-08 23:28:13",
+      "updated_at": "2026-07-08 23:34:21",
       "error": "",
       "rank": 18
     },
@@ -398,7 +398,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.3,
       "dividend_dps_used": 0.6,
-      "updated_at": "2026-07-08 23:28:16",
+      "updated_at": "2026-07-08 23:34:26",
       "error": "",
       "rank": 19
     },
@@ -419,7 +419,7 @@
       "dividend_report_year": 2024,
       "interim_dividend": null,
       "dividend_dps_used": 0.1,
-      "updated_at": "2026-07-08 23:28:18",
+      "updated_at": "2026-07-08 23:34:27",
       "error": "",
       "rank": 20
     },
@@ -440,7 +440,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.11950000000000001,
       "dividend_dps_used": 0.375,
-      "updated_at": "2026-07-08 23:28:14",
+      "updated_at": "2026-07-08 23:34:23",
       "error": "",
       "rank": 21
     },
@@ -461,7 +461,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.21000000000000002,
       "dividend_dps_used": 0.36,
-      "updated_at": "2026-07-08 23:28:23",
+      "updated_at": "2026-07-08 23:34:34",
       "error": "",
       "rank": 22
     },
@@ -482,7 +482,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.2,
       "dividend_dps_used": 0.4,
-      "updated_at": "2026-07-08 23:28:19",
+      "updated_at": "2026-07-08 23:34:29",
       "error": "",
       "rank": 23
     },
@@ -503,7 +503,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.3,
       "dividend_dps_used": 0.52,
-      "updated_at": "2026-07-08 23:28:19",
+      "updated_at": "2026-07-08 23:34:29",
       "error": "",
       "rank": 24
     },
@@ -524,7 +524,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.4481,
-      "updated_at": "2026-07-08 23:28:21",
+      "updated_at": "2026-07-08 23:34:31",
       "error": "",
       "rank": 25
     },
@@ -545,7 +545,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.131,
-      "updated_at": "2026-07-08 23:28:21",
+      "updated_at": "2026-07-08 23:34:31",
       "error": "",
       "rank": 26
     },
@@ -566,7 +566,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.30619999999999997,
       "dividend_dps_used": 0.52915,
-      "updated_at": "2026-07-08 23:28:13",
+      "updated_at": "2026-07-08 23:34:21",
       "error": "",
       "rank": 27
     },
@@ -587,7 +587,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.20335999999999999,
       "dividend_dps_used": 0.32091,
-      "updated_at": "2026-07-08 23:28:18",
+      "updated_at": "2026-07-08 23:34:28",
       "error": "",
       "rank": 28
     },
@@ -608,7 +608,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.1,
       "dividend_dps_used": 0.1,
-      "updated_at": "2026-07-08 23:28:12",
+      "updated_at": "2026-07-08 23:34:20",
       "error": "",
       "rank": 29
     },
@@ -629,7 +629,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.13999999999999999,
       "dividend_dps_used": 0.25,
-      "updated_at": "2026-07-08 23:28:19",
+      "updated_at": "2026-07-08 23:34:29",
       "error": "",
       "rank": 30
     },
@@ -650,7 +650,7 @@
       "dividend_report_year": 2024,
       "interim_dividend": 0.12,
       "dividend_dps_used": 0.24,
-      "updated_at": "2026-07-08 23:28:14",
+      "updated_at": "2026-07-08 23:34:22",
       "error": "",
       "rank": 31
     },
@@ -671,7 +671,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": null,
       "dividend_dps_used": 0.18,
-      "updated_at": "2026-07-08 23:28:23",
+      "updated_at": "2026-07-08 23:34:33",
       "error": "",
       "rank": 32
     },
@@ -692,7 +692,7 @@
       "dividend_report_year": 2024,
       "interim_dividend": null,
       "dividend_dps_used": 0.891,
-      "updated_at": "2026-07-08 23:28:20",
+      "updated_at": "2026-07-08 23:34:30",
       "error": "",
       "rank": 33
     },
@@ -713,7 +713,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.3309,
       "dividend_dps_used": 0.5453,
-      "updated_at": "2026-07-08 23:28:17",
+      "updated_at": "2026-07-08 23:34:26",
       "error": "",
       "rank": 34
     },
@@ -734,7 +734,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.1563,
       "dividend_dps_used": 0.1563,
-      "updated_at": "2026-07-08 23:28:14",
+      "updated_at": "2026-07-08 23:34:23",
       "error": "",
       "rank": 35
     },
@@ -755,7 +755,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.18580000000000002,
       "dividend_dps_used": 0.18580000000000002,
-      "updated_at": "2026-07-08 23:28:15",
+      "updated_at": "2026-07-08 23:34:24",
       "error": "",
       "rank": 36
     },
@@ -776,7 +776,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.10940000000000001,
       "dividend_dps_used": 0.10940000000000001,
-      "updated_at": "2026-07-08 23:28:16",
+      "updated_at": "2026-07-08 23:34:25",
       "error": "",
       "rank": 37
     },
@@ -797,7 +797,7 @@
       "dividend_report_year": 2025,
       "interim_dividend": 0.123,
       "dividend_dps_used": 0.123,
-      "updated_at": "2026-07-08 23:28:20",
+      "updated_at": "2026-07-08 23:34:30",
       "error": "",
       "rank": 38
     }

@@ -207,9 +207,18 @@ def has_interim_dividend_for_year(dividend: pd.DataFrame, year: int) -> bool:
 
 
 def ttm_dividend(dividend: pd.DataFrame, as_of: pd.Timestamp) -> float:
-    start = as_of - pd.Timedelta(days=365)
-    window = dividend[(dividend["除权日"] <= as_of) & (dividend["除权日"] > start)]
-    return float(window["dps"].sum())
+    visible = dividend[dividend["除权日"] <= as_of].copy()
+    if visible.empty:
+        return 0.0
+    dividend_type = visible["分红类型"].astype(str)
+    interim = visible[dividend_type.str.contains("中期", na=False, regex=False)].sort_values("除权日")
+    annual = visible[dividend_type.str.contains("年度", na=False, regex=False)].sort_values("除权日")
+    total = 0.0
+    if not interim.empty:
+        total += float(interim.iloc[-1]["dps"])
+    if not annual.empty:
+        total += float(annual.iloc[-1]["dps"])
+    return total
 
 
 def current_dividend_basis(dividend: pd.DataFrame, as_of: pd.Timestamp) -> tuple[float, str, int, float | None]:

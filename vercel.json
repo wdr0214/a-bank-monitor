@@ -11,7 +11,7 @@
       "headers": { "Cache-Control": "no-store" },
       "dest": "/data/$1"
     },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/api/refresh", "dest": "/api/refresh.js" },
     { "src": "/", "dest": "/web/index.html" },
     { "src": "/(.*)", "dest": "/web/$1" }
   ]

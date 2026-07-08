@@ -108,6 +108,7 @@ function renderTable() {
         <td>${fmt.text(row.profit_period)}</td>
         <td>${fmt.number(Number(row.annual_dividend), 4)}</td>
         <td>${fmt.number(Number(row.ttm_dividend), 4)}</td>
+        <td>${row.uses_ttm_dividend ? "TTM" : "年度"}</td>
         <td class="${row.error ? "negative" : "empty"}">${fmt.text(row.error)}</td>
       </tr>`;
     })

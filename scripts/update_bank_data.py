@@ -177,16 +177,22 @@ def annual_dividend_for_year(dividend: pd.DataFrame, year: int) -> float:
     return float(dividend.loc[dividend["report_year"].eq(year), "dps"].sum())
 
 
+def has_interim_dividend(dividend: pd.DataFrame) -> bool:
+    return bool(dividend["分红类型"].astype(str).str.contains("中期", na=False, regex=False).any())
+
+
 def ttm_dividend(dividend: pd.DataFrame, as_of: pd.Timestamp) -> float:
     start = as_of - pd.Timedelta(days=365)
     window = dividend[(dividend["除权日"] <= as_of) & (dividend["除权日"] > start)]
     return float(window["dps"].sum())
 
 
-def dividend_for_percentile(dividend: pd.DataFrame, date: pd.Timestamp) -> float:
+def dividend_for_percentile(dividend: pd.DataFrame, date: pd.Timestamp, use_ttm: bool) -> float:
     if date.year <= 2025:
         return annual_dividend_for_year(dividend, date.year)
-    return ttm_dividend(dividend, date)
+    if use_ttm:
+        return ttm_dividend(dividend, date)
+    return annual_dividend_for_year(dividend, 2025)
 
 
 def dividend_yield_percentile(
@@ -194,6 +200,7 @@ def dividend_yield_percentile(
     dividend: pd.DataFrame,
     current_yield: float | None,
     as_of: pd.Timestamp,
+    use_ttm: bool,
 ) -> float | None:
     if current_yield is None:
         return None
@@ -207,7 +214,7 @@ def dividend_yield_percentile(
         date = row["date"]
         if pd.isna(close) or close <= 0 or pd.isna(date):
             continue
-        dps = dividend_for_percentile(dividend, date)
+        dps = dividend_for_percentile(dividend, date, use_ttm)
         if dps > 0:
             yields.append(float(dps / close))
     if not yields:
@@ -283,15 +290,18 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
             history = read_csv(CACHE / f"hist_{code}_raw.csv")
             quote = quotes[code]
             price = quote.price
-            ttm_dps = ttm_dividend(dividend, as_of_ts)
+            uses_ttm = has_interim_dividend(dividend)
             annual_dps = annual_dividend_for_year(dividend, min(as_of.year, 2025))
-            current_yield = ttm_dps / price if price and ttm_dps > 0 else None
-            percentile = dividend_yield_percentile(history, dividend, current_yield, as_of_ts)
+            ttm_dps = ttm_dividend(dividend, as_of_ts) if uses_ttm else None
+            dividend_dps = ttm_dps if uses_ttm else annual_dps
+            current_yield = dividend_dps / price if price and dividend_dps and dividend_dps > 0 else None
+            percentile = dividend_yield_percentile(history, dividend, current_yield, as_of_ts, uses_ttm)
             growth, period = latest_profit_growth(financial, as_of)
         except Exception as exc:
             price = None
             ttm_dps = None
             annual_dps = None
+            uses_ttm = False
             current_yield = None
             percentile = None
             growth = None
@@ -311,6 +321,7 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
                 "profit_period": period,
                 "annual_dividend": annual_dps,
                 "ttm_dividend": ttm_dps,
+                "uses_ttm_dividend": uses_ttm,
                 "updated_at": iso_now(),
                 "error": row_error,
             }
@@ -350,6 +361,7 @@ def write_latest(rows: list[dict[str, Any]], errors: list[str]) -> None:
         "profit_period",
         "annual_dividend",
         "ttm_dividend",
+        "uses_ttm_dividend",
         "updated_at",
         "error",
     ]

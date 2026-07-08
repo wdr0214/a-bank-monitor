@@ -36,6 +36,26 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/latest.json data/latest.csv data/status.json
-          git diff --cached --quiet || git commit -m "Update bank monitor data"
-          git pull --rebase origin main
+          if git diff --cached --quiet; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+          git commit -m "Update bank monitor data"
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push failed, retrying on top of latest origin/main..."
+            cp data/latest.json /tmp/latest.json
+            cp data/latest.csv /tmp/latest.csv
+            cp data/status.json /tmp/status.json
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/latest.json data/latest.json
+            cp /tmp/latest.csv data/latest.csv
+            cp /tmp/status.json data/status.json
+            git add data/latest.json data/latest.csv data/status.json
+            git diff --cached --quiet && exit 0
+            git commit -m "Update bank monitor data"
+          done
           git push

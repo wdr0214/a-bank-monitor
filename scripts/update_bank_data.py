@@ -87,6 +87,24 @@ def read_csv(path: Path) -> pd.DataFrame:
     return pd.read_csv(path, encoding="utf-8-sig")
 
 
+def load_financial(code: str) -> tuple[pd.DataFrame, str]:
+    cache_path = CACHE / f"financial_{code}.csv"
+    if os.getenv("USE_CACHED_FINANCIAL") == "1":
+        return read_csv(cache_path), ""
+    try:
+        import akshare as ak
+
+        financial = ak.stock_financial_abstract(symbol=code)
+        if financial.empty:
+            raise RuntimeError("akshare returned empty financial data")
+        financial.to_csv(cache_path, index=False, encoding="utf-8-sig")
+        return financial, ""
+    except Exception as exc:
+        if cache_path.exists():
+            return read_csv(cache_path), f"{code}: 财务数据实时更新失败，已使用缓存（{exc}）"
+        raise
+
+
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -146,18 +164,21 @@ def latest_profit_growth(financial: pd.DataFrame, as_of: datetime) -> tuple[floa
         return None, ""
     values = pd.to_numeric(row.iloc[0].drop(labels=["选项", "指标"], errors="ignore"), errors="coerce")
     rows: list[tuple[pd.Timestamp, str, float]] = []
+    as_of_date = pd.Timestamp(as_of.date())
     for period, value in values.items():
         period = str(period)
         if not period.isdigit() or len(period) != 8 or pd.isna(value):
             continue
+        period_end = pd.Timestamp(f"{period[:4]}-{period[4:6]}-{period[6:8]}")
+        if period_end > as_of_date:
+            continue
         previous_period = str(int(period[:4]) - 1) + period[4:]
         previous_value = values.get(previous_period, math.nan)
         if pd.notna(previous_value) and previous_value != 0:
-            rows.append((report_available_date(period), period, float(value / previous_value - 1)))
-    visible = [item for item in rows if item[0].to_pydatetime() <= as_of]
-    if not visible:
+            rows.append((period_end, period, float(value / previous_value - 1)))
+    if not rows:
         return None, ""
-    _, period, growth = sorted(visible, key=lambda item: (item[0], item[1]))[-1]
+    _, period, growth = sorted(rows, key=lambda item: (item[0], item[1]))[-1]
     return growth, period
 
 
@@ -332,7 +353,9 @@ def build_rows(as_of: datetime) -> tuple[list[dict[str, Any]], list[str]]:
     for code, name, listing_date in universe:
         row_error = ""
         try:
-            financial = read_csv(CACHE / f"financial_{code}.csv")
+            financial, financial_warning = load_financial(code)
+            if financial_warning:
+                errors.append(financial_warning)
             dividend = normalize_dividend(read_csv(CACHE / f"dividend_{code}.csv"))
             history = read_csv(CACHE / f"hist_{code}_raw.csv")
             quote = quotes[code]
@@ -407,7 +430,7 @@ def write_latest(rows: list[dict[str, Any]], errors: list[str]) -> None:
     DATA.mkdir(parents=True, exist_ok=True)
     payload = {
         "generated_at": iso_now(),
-        "source": "GitHub Actions / Tencent quote / cached financial and dividend data",
+        "source": "GitHub Actions / Tencent quote / AkShare financial data with cached fallback / cached dividend data",
         "dividend_policy": "Current yield uses 2026 TTM available dividends; percentile history uses annual dividend for 2025 and before.",
         "rows": rows,
     }

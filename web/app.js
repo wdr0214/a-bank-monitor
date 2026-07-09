@@ -33,8 +33,8 @@ async function fetchJson(url) {
 
 async function loadData() {
   const [latest, status] = await Promise.all([
-    fetchJson("/data/latest.json"),
-    fetchJson("/data/status.json")
+    fetchJson("data/latest.json"),
+    fetchJson("data/status.json")
   ]);
   state.rows = Array.isArray(latest.rows) ? latest.rows : [];
   renderStatus(status, latest);
@@ -140,6 +140,12 @@ async function triggerRefresh() {
   button.disabled = true;
   button.textContent = "提交中";
   try {
+    if (window.location.hostname.endsWith("github.io")) {
+      await loadData();
+      errorBox.textContent = "GitHub Pages 已重新读取最新数据；计算由定时任务和 GitHub Actions 自动完成。";
+      errorBox.classList.remove("hidden");
+      return;
+    }
     const response = await fetch("/api/refresh", { method: "POST" });
     const result = await response.json();
     if (!response.ok || !result.ok) {

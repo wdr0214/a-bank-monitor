@@ -1,8 +1,7 @@
 {
-  "ok": true,
-  "generated_at": "2026-07-30 09:40:49",
+  "ok": false,
+  "generated_at": "2026-07-30 10:41:12",
   "last_success_at": "2026-07-30 09:40:49",
-  "error": "",
-  "errors": [],
-  "row_count": 38
+  "error": "刷新失败：HTTPSConnectionPool(host='qt.gtimg.cn', port=443): Max retries exceeded with url: /q=sz000001,sh600000,sh600015,sh600016,sh600036,sh601009,sh601166,sh601169,sh601288,sh601328,sh601398,sh601818,sh601939,sh601988,sh601998,sz002142,sh600908,sh600919,sh600926,sh600928,sh601077,sh601128,sh601187,sh601229,sh601577,sh601658,sh601838,sh601860,sh601916,sh601963,sh601997,sz002807,sz002839,sz002936,sz002948,sz002958,sz002966,sh603323 (Caused by NewConnectionError(\"HTTPSConnection(host='qt.gtimg.cn', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))",
+  "errors": []
 }

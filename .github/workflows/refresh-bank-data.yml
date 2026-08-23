@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   refresh:
+    if: startsWith(inputs.source, 'manual')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

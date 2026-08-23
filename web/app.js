@@ -6,6 +6,9 @@ const state = {
   polling: null
 };
 
+const GITHUB_WORKFLOW_URL = "https://github.com/wdr0214/a-bank-monitor/actions/workflows/refresh-bank-data.yml";
+const GITHUB_PAGES_REFRESH_API = "https://a-bank-monitor.vercel.app/api/refresh";
+
 const fmt = {
   number(value, digits = 2) {
     return Number.isFinite(value) ? value.toFixed(digits) : "--";
@@ -29,6 +32,27 @@ async function fetchJson(url) {
     throw new Error(`${url} 加载失败：${response.status}`);
   }
   return response.json();
+}
+
+async function postRefresh() {
+  const endpoint = window.location.hostname.endsWith("github.io")
+    ? GITHUB_PAGES_REFRESH_API
+    : "/api/refresh";
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      signal: controller.signal
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || `刷新触发失败：${response.status}`);
+    }
+    return result;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function loadData() {
@@ -140,24 +164,19 @@ async function triggerRefresh() {
   button.disabled = true;
   button.textContent = "提交中";
   try {
-    if (window.location.hostname.endsWith("github.io")) {
-      await loadData();
-      errorBox.textContent = "GitHub Pages 已重新读取最新数据；计算由定时任务和 GitHub Actions 自动完成。";
-      errorBox.classList.remove("hidden");
-      return;
-    }
-    const response = await fetch("/api/refresh", { method: "POST" });
-    const result = await response.json();
-    if (!response.ok || !result.ok) {
-      throw new Error(result.error || "刷新触发失败");
-    }
-    errorBox.textContent = result.message || "刷新任务已提交";
+    const result = await postRefresh();
+    errorBox.textContent = result.message || "刷新任务已提交，稍后页面会自动读取最新结果。";
     errorBox.classList.remove("hidden");
     if (state.polling) clearInterval(state.polling);
     state.polling = setInterval(loadData, 15000);
     setTimeout(() => clearInterval(state.polling), 180000);
   } catch (error) {
-    errorBox.textContent = error.message || String(error);
+    if (window.location.hostname.endsWith("github.io")) {
+      window.open(GITHUB_WORKFLOW_URL, "_blank", "noopener");
+      errorBox.textContent = `无法自动触发刷新：${error.message || error}\n已打开 GitHub Actions 页面；登录 GitHub 后点击 Run workflow 可手动刷新计算。`;
+    } else {
+      errorBox.textContent = error.message || String(error);
+    }
     errorBox.classList.remove("hidden");
   } finally {
     button.disabled = false;

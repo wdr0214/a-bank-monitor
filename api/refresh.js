@@ -1,4 +1,25 @@
+const ALLOWED_ORIGINS = new Set([
+  "https://wdr0214.github.io",
+  "https://a-bank-monitor.vercel.app"
+]);
+
+function applyCors(request, response) {
+  const origin = request.headers.origin;
+  if (ALLOWED_ORIGINS.has(origin)) {
+    response.setHeader("Access-Control-Allow-Origin", origin);
+    response.setHeader("Vary", "Origin");
+  }
+  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
 export default async function handler(request, response) {
+  applyCors(request, response);
+
+  if (request.method === "OPTIONS") {
+    return response.status(204).end();
+  }
+
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
     return response.status(405).json({ ok: false, error: "只支持 POST 请求" });

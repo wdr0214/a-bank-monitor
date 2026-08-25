@@ -63,6 +63,18 @@ async function loadData() {
   state.rows = Array.isArray(latest.rows) ? latest.rows : [];
   renderStatus(status, latest);
   renderTable();
+  return { latest, status };
+}
+
+function timestamp(value) {
+  const parsed = Date.parse(String(value || "").replace(" ", "T"));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function isNewerData(latest, previousGeneratedAt) {
+  const current = timestamp(latest.generated_at);
+  const previous = timestamp(previousGeneratedAt);
+  return current !== null && (previous === null || current > previous);
 }
 
 function renderStatus(status, latest) {
@@ -161,15 +173,49 @@ function wireSorting() {
 async function triggerRefresh() {
   const button = document.getElementById("refreshBtn");
   const errorBox = document.getElementById("errorBox");
+  const previousGeneratedAt = document.getElementById("updatedAt").textContent;
   button.disabled = true;
-  button.textContent = "提交中";
+  button.textContent = "正在提交";
   try {
     const result = await postRefresh();
-    errorBox.textContent = result.message || "刷新任务已提交，稍后页面会自动读取最新结果。";
+    errorBox.textContent = result.message || "刷新任务已提交，正在等待数据更新。";
     errorBox.classList.remove("hidden");
     if (state.polling) clearInterval(state.polling);
-    state.polling = setInterval(loadData, 15000);
-    setTimeout(() => clearInterval(state.polling), 180000);
+    button.textContent = "正在刷新";
+    let refreshComplete = false;
+
+    const poll = async () => {
+      try {
+        const { latest, status } = await loadData();
+        if (isNewerData(latest, previousGeneratedAt)) {
+          clearInterval(state.polling);
+          state.polling = null;
+          refreshComplete = true;
+          button.disabled = false;
+          button.textContent = "手动刷新";
+          errorBox.textContent = `数据已更新至 ${latest.generated_at || status.generated_at}`;
+          errorBox.classList.remove("hidden");
+        }
+      } catch (error) {
+        // A deployment can briefly return an old or unavailable static file. Keep polling.
+        errorBox.textContent = `正在等待最新数据发布：${error.message || error}`;
+        errorBox.classList.remove("hidden");
+      }
+    };
+
+    await poll();
+    if (!refreshComplete) {
+      state.polling = setInterval(poll, 10000);
+    }
+    setTimeout(() => {
+      if (refreshComplete || !state.polling) return;
+      clearInterval(state.polling);
+      state.polling = null;
+      button.disabled = false;
+      button.textContent = "手动刷新";
+      errorBox.textContent = "刷新任务尚未在 12 分钟内发布新数据。请稍后再次点击，或在 GitHub Actions 中查看任务状态。";
+      errorBox.classList.remove("hidden");
+    }, 12 * 60 * 1000);
   } catch (error) {
     if (window.location.hostname.endsWith("github.io")) {
       window.open(GITHUB_WORKFLOW_URL, "_blank", "noopener");
@@ -178,7 +224,6 @@ async function triggerRefresh() {
       errorBox.textContent = error.message || String(error);
     }
     errorBox.classList.remove("hidden");
-  } finally {
     button.disabled = false;
     button.textContent = "手动刷新";
   }
